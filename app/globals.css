@@ -1,3 +1,26 @@
 body {
   margin: 0px;
 }
+
+.search_field_container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.search_field {
+  min-width: 100px;
+  width: 40vw;
+  margin-right: 2rem;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+a:hover {
+  color: lightgray;
+}
