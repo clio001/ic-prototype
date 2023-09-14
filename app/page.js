@@ -1,5 +1,5 @@
-import LandingPage from "./pages/LandingPage.jsx";
-import Navigation from "./pages/Navigation.jsx";
+import LandingPage from "./pages/LandingPage";
+import Navigation from "./pages/Navigation";
 
 export default function Home() {
   return (
