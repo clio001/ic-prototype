@@ -1,5 +1,5 @@
 import React from "react";
-import Navigation from "./Navigation";
+import Navigation from "../pages/Navigation";
 import { Typography } from "@mui/material";
 
 function About() {
