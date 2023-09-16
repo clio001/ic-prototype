@@ -29,7 +29,9 @@ function Navigation() {
           <Link href="/about">
             <Typography>About</Typography>
           </Link>
-          <Typography>My Workplace</Typography>
+          <Link href="/myworkspace">
+            <Typography>My Workspace</Typography>
+          </Link>
           <Typography>Documentation</Typography>
           <Typography>EN | DE</Typography>
         </Box>
