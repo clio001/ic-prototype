@@ -5,15 +5,14 @@ body {
 .search_field_container {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: center;
   margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .search_field {
   min-width: 100px;
   width: 40vw;
-  margin-right: 2rem;
 }
 
 a {
@@ -23,4 +22,18 @@ a {
 
 a:hover {
   color: lightgray;
+}
+
+.feature1_image {
+  width: 30vw;
+  height: 50vh;
+  background-size: cover;
+  border-radius: 10px;
+}
+
+.feature2_image {
+  width: 20vw;
+  height: 23vh;
+  background-size: cover;
+  border-radius: 10px;
 }
