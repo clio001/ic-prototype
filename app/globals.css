@@ -29,6 +29,17 @@ a:hover {
   height: 50vh;
   background-size: cover;
   border-radius: 10px;
+  transition: ease-in-out 0.1s;
+}
+
+.feature1_image:hover {
+  scale: 1.03;
+  cursor: pointer;
+}
+
+.feature2_image:hover {
+  scale: 1.03;
+  cursor: pointer;
 }
 
 .feature2_image {
@@ -36,4 +47,5 @@ a:hover {
   height: 23vh;
   background-size: cover;
   border-radius: 10px;
+  transition: ease-in-out 0.1s;
 }
