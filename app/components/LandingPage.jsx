@@ -39,6 +39,9 @@ function LandingPage() {
           className="feature1_image"
           elevation={6}
           sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
             backgroundImage: `url("https://upload.wikimedia.org/wikipedia/commons/1/1d/Heinrich_Barth%27s_route_through_Africa%2C_1850_to_1855.jpg")`,
           }}
         ></Paper>

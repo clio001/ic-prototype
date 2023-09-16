@@ -21,13 +21,14 @@ const theme = createTheme({
 
 export default function RootLayout({ children }) {
   return (
-    <ThemeProvider theme={theme}>
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en">
+      <body className={inter.className}>
+        {" "}
+        <ThemeProvider theme={theme}>
           <Navigation />
-          {children}
-        </body>
-      </html>
-    </ThemeProvider>
+          {children}{" "}
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }
