@@ -14,7 +14,7 @@ function LandingPage() {
             autoComplete: "off", // Disable autocomplete
           }}
         />
-        <Button variant="contained" color="secondary" size="large">
+        <Button variant="contained" color="primary" size="large">
           Find
         </Button>
       </Box>
