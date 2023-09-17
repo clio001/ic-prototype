@@ -1,0 +1,15 @@
+.page_container {
+  background-color: #eaeff6;
+  min-height: 100vh;
+}
+
+.result_container {
+  margin: 3rem;
+  transition: ease-in-out 1ms;
+}
+
+.result_container:hover {
+  scale: 1.02;
+  box-shadow: 2px 2px 5px grey;
+  cursor: pointer;
+}
