@@ -13,12 +13,19 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import { useRouter } from "next/navigation";
 import React from "react";
+import { useState } from "react";
 
 function LandingPage() {
   const router = useRouter();
+  const [searchPhrase, setSearchPhrase] = useState("");
 
   const SearchButton = () => (
-    <IconButton onClick={() => router.push("/listview")}>
+    <IconButton
+      onClick={() => {
+        console.log(searchPhrase);
+        router.push("/listview");
+      }}
+    >
       <SearchIcon />
     </IconButton>
   );
@@ -35,6 +42,7 @@ function LandingPage() {
             InputProps={{
               endAdornment: <SearchButton />,
             }}
+            onChange={(e) => setSearchPhrase(e.target.value)}
           />
         </Paper>
       </Box>
