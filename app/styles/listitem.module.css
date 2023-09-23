@@ -1,0 +1,9 @@
+.item {
+  transition: ease-in-out 1.5ms;
+}
+
+.item:hover {
+  transform: scale(1.02);
+  box-shadow: 1px 1px 10px grey;
+  cursor: pointer;
+}
