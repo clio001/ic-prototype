@@ -3,13 +3,16 @@
   min-height: 100vh;
 }
 
-.result_container {
-  margin: 3rem;
-  transition: ease-in-out 1ms;
+.listitem_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.result_container:hover {
-  scale: 1.02;
-  box-shadow: 2px 2px 5px grey;
-  cursor: pointer;
+.result_container {
+  display: flex;
+  flex-direction: column;
+
+  margin: 3rem;
+  max-width: 70%;
 }
