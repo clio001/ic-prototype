@@ -1,56 +1,135 @@
 "use client";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, CircularProgress } from "@mui/material";
 import React from "react";
 import ListItem from "../components/ListItem";
 import listview from "../styles/listview.module.css";
 import { DOMParser, XMLSerializer } from "@xmldom/xmldom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function ListView() {
-  const [titel, setTitel] = useState();
-  const getData = async () => {
-    const response = await fetch(
-      "https://sru.k10plus.de/gvk7?version=1.1&operation=searchRetrieve&query=pica.prs=adenauer,konrad&maximumRecords=300&recordSchema=dc"
-    );
-    const xmlString = await response.text();
+  const [recordList, setRecordList] = useState();
+  const [loading, setLoading] = useState(true);
+  const [searchHits, setSearchHits] = useState();
 
-    const parser = new DOMParser();
-    const xmlDocument = parser.parseFromString(xmlString, "text/xml");
+  useEffect(() => {
+    const getData = async () => {
+      const titleList = [];
 
-    // Define the namespace for the "zs" and "dc" prefixes
-    const namespaceURI = "http://www.loc.gov/zing/srw/";
-    const dcNamespaceURI = "http://purl.org/dc/elements/1.1/";
+      const response = await fetch(
+        "https://sru.k10plus.de/gvk7?version=1.1&operation=searchRetrieve&query=pica.prs=Petermann,August&maximumRecords=32&recordSchema=dc"
+      );
+      const xmlString = await response.text();
 
-    // Use the full tag name with namespace prefix (zs:record)
-    const records = xmlDocument.getElementsByTagNameNS(namespaceURI, "record");
+      const parser = new DOMParser();
+      const xmlDocument = parser.parseFromString(xmlString, "text/xml");
 
-    // Loop through each "record" element and extract the title
-    for (let i = 0; i < records.length; i++) {
-      const record = records[i];
+      // Define the namespace for the "zs" and "dc" prefixes
+      const namespaceURI = "http://www.loc.gov/zing/srw/";
+      const dcNamespaceURI = "http://purl.org/dc/elements/1.1/";
 
-      // Use getElementsByTagNameNS to select the title element within the "record" element
-      const titleElements = record.getElementsByTagNameNS(
-        dcNamespaceURI,
-        "title"
+      // Use the full tag name with namespace prefix (zs:record)
+      const records = xmlDocument.getElementsByTagNameNS(
+        namespaceURI,
+        "record"
       );
 
-      if (titleElements.length > 0) {
-        const title = titleElements[0].textContent; // Extract the text content of the first title element
+      // Loop through each "record" element and extract the title
+      for (let i = 0; i < records.length; i++) {
+        const record = records[i];
+        let title = "";
+        let contributor = "";
+        let date = "";
+        let format = [];
 
-        return title;
-      } else {
-        console.log("Title not found for record", i + 1);
+        // Use getElementsByTagNameNS to select the title element within the "record" element
+        const titleElements = record.getElementsByTagNameNS(
+          dcNamespaceURI,
+          "title"
+        );
+
+        if (titleElements) {
+          title = titleElements[0].textContent; // Extract the text content of the first title element
+        }
+
+        const contributors = record.getElementsByTagNameNS(
+          dcNamespaceURI,
+          "contributor"
+        );
+
+        if (contributors.length > 0) {
+          contributor = contributors[0].textContent;
+        } else {
+          contributor = "n.a.";
+        }
+
+        const dates = record.getElementsByTagNameNS(dcNamespaceURI, "date");
+
+        if (dates.length > 0) {
+          date = dates[0].textContent;
+        } else {
+          date = "n.a.";
+        }
+
+        const formats = record.getElementsByTagNameNS(dcNamespaceURI, "format");
+
+        if (formats.length > 0) {
+          for (let n = 0; n < formats.length; n++) {
+            format.push(formats[n].textContent);
+          }
+        } else {
+          format.push("n.a.");
+        }
+
+        const singleRecord = {
+          dcTitle: title,
+          dcContributor: contributor,
+          dcDate: date,
+          dcFormat: format,
+        };
+
+        titleList.push(singleRecord);
       }
-    }
-  };
+      console.log(titleList);
+      setRecordList(titleList);
+      setLoading(false);
+      setSearchHits(titleList.length);
+    };
+    getData();
+  }, []);
 
   return (
     <Box className={listview.page_container}>
-      <Typography variant="h4" sx={{ padding: "3rem" }}>
-        Results {titel}
-      </Typography>
-      <Box className={listview.result_container}>
-        {titel && <ListItem title={titel} />}
+      {" "}
+      {loading && (
+        <Box
+          sx={{ display: "flex", justifyContent: "center", paddingTop: "5rem" }}
+        >
+          <CircularProgress />
+        </Box>
+      )}
+      {searchHits && (
+        <>
+          <Typography
+            variant="h4"
+            sx={{ marginLeft: "3rem", paddingTop: "1rem" }}
+          >
+            Results
+          </Typography>
+          <Typography
+            variant="body1"
+            sx={{ marginLeft: "3rem", marginTop: "1rem" }}
+          >
+            Search hits: {searchHits}
+          </Typography>
+        </>
+      )}
+      <Box className={listview.listitem_container}>
+        <Box className={listview.result_container}>
+          {recordList &&
+            recordList.map((recordElement, i) => {
+              return <ListItem key={i} recordElement={recordElement} />;
+            })}
+        </Box>
       </Box>
     </Box>
   );
