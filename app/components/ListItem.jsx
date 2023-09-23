@@ -8,37 +8,41 @@ import {
 } from "@mui/material";
 import React from "react";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-
-function ListItem() {
+import listitem from "../styles/listitem.module.css";
+function ListItem(props) {
+  const record = props.recordElement;
   return (
-    <div>
-      <Card sx={{ minWidth: 275, display: "flex", flexDirection: "row" }}>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "12rem",
-            backgroundColor: "#616190",
-          }}
-        >
-          <MenuBookIcon />
-        </Box>
+    <Card
+      className={listitem.item}
+      sx={{
+        minWidth: 275,
+        display: "flex",
+        flexDirection: "row",
+        marginBottom: "2rem",
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          minWidth: "10rem",
+          backgroundColor: "#616190",
+        }}
+      >
+        <MenuBookIcon />
+      </Box>
 
-        <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            Record type
-          </Typography>
-          <Typography variant="h5" component="div">
-            Title, creator, year
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            Holding institution
-          </Typography>
-          <Typography variant="body2">Additional metadata</Typography>
-        </CardContent>
-      </Card>
-    </div>
+      <CardContent>
+        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+          {record.dcDate}, {record.dcFormat[record.dcFormat.length - 1]}
+        </Typography>
+        <Typography variant="h6" component="div">
+          {record.dcTitle}
+        </Typography>
+        <Typography color="text.secondary">{record.dcContributor}</Typography>
+      </CardContent>
+    </Card>
   );
 }
 
