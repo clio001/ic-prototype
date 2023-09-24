@@ -8,9 +8,26 @@ import {
 } from "@mui/material";
 import React from "react";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
+import MapIcon from "@mui/icons-material/Map";
+import DvrOutlinedIcon from "@mui/icons-material/DvrOutlined";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import listitem from "../styles/listitem.module.css";
 function ListItem(props) {
   const record = props.recordElement;
+
+  const recordIcon = () => {
+    if (record.dcFormat[record.dcFormat.length - 1] == "Band") {
+      return <MenuBookIcon />;
+    } else if (record.dcFormat[record.dcFormat.length - 1] == "Blatt") {
+      return <MapIcon />;
+    } else if (
+      record.dcFormat[record.dcFormat.length - 1] == "Online-Ressource"
+    ) {
+      return <DvrOutlinedIcon />;
+    } else {
+      return <HelpOutlineOutlinedIcon />;
+    }
+  };
   return (
     <Card
       className={listitem.item}
@@ -30,7 +47,7 @@ function ListItem(props) {
           backgroundColor: "#616190",
         }}
       >
-        <MenuBookIcon />
+        {recordIcon()}
       </Box>
 
       <CardContent>
