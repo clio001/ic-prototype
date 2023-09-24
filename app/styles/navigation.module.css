@@ -25,6 +25,7 @@
 .navbar_items {
   display: flex;
   flex-direction: row;
+  align-items: center;
   gap: 2rem;
   margin-right: 4rem;
 }
