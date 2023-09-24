@@ -1,5 +1,5 @@
 "use client";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, Avatar } from "@mui/material";
 import React from "react";
 import navigation from "../styles/navigation.module.css";
 import Link from "next/link";
@@ -11,12 +11,6 @@ function Navigation() {
     <div>
       <Box className={navigation.navbar_container}>
         <Box>
-          <Link href="http://www.staatsbibliothek-berlin.de" target="_blank">
-            <img
-              src="/stabi-logo-kante-weiss.png"
-              className={navigation.navbar_logo}
-            />
-          </Link>
           <Link href="/">
             <img
               src="/IN_CONTEXT_Schriftzug ohne Rand weiss.png"
@@ -34,6 +28,7 @@ function Navigation() {
           </Link>
           <Typography>Documentation</Typography>
           <Typography>EN | DE</Typography>
+          <Avatar sx={{ width: 34, height: 34 }}></Avatar>
         </Box>
       </Box>
     </div>
