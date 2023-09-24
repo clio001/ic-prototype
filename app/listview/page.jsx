@@ -1,10 +1,17 @@
 "use client";
-import { Box, Typography, CircularProgress } from "@mui/material";
+import {
+  Box,
+  Typography,
+  CircularProgress,
+  Breadcrumbs,
+  Pagination,
+} from "@mui/material";
 import React from "react";
 import ListItem from "../components/ListItem";
 import listview from "../styles/listview.module.css";
-import { DOMParser, XMLSerializer } from "@xmldom/xmldom";
+import { DOMParser } from "@xmldom/xmldom";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 function ListView() {
   const [recordList, setRecordList] = useState();
@@ -109,6 +116,16 @@ function ListView() {
       )}
       {searchHits && (
         <>
+          {" "}
+          <Breadcrumbs
+            aria-label="breadcrumb"
+            className="breadcrumbs_container"
+          >
+            <Link href="/" className="breadcrumbs_link">
+              <Typography variant="body2">Home</Typography>
+            </Link>
+            <Typography variant="body2">Results</Typography>
+          </Breadcrumbs>
           <Typography
             variant="h4"
             sx={{ marginLeft: "3rem", paddingTop: "1rem" }}
@@ -125,6 +142,19 @@ function ListView() {
       )}
       <Box className={listview.listitem_container}>
         <Box className={listview.result_container}>
+          {recordList && (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                marginBottom: "2rem",
+              }}
+            >
+              <Pagination count={10} variant="outlined" color="primary" />
+            </Box>
+          )}
+
           {recordList &&
             recordList.map((recordElement, i) => {
               return <ListItem key={i} recordElement={recordElement} />;
