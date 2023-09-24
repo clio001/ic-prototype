@@ -5,6 +5,9 @@ import {
   CircularProgress,
   Breadcrumbs,
   Pagination,
+  Paper,
+  TextField,
+  IconButton,
 } from "@mui/material";
 import React from "react";
 import ListItem from "../components/ListItem";
@@ -12,11 +15,22 @@ import listview from "../styles/listview.module.css";
 import { DOMParser } from "@xmldom/xmldom";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import SearchIcon from "@mui/icons-material/Search";
 
 function ListView() {
   const [recordList, setRecordList] = useState();
   const [loading, setLoading] = useState(true);
   const [searchHits, setSearchHits] = useState();
+
+  const SearchButton = () => (
+    <IconButton
+      onClick={() => {
+        router.push("/listview");
+      }}
+    >
+      <SearchIcon />
+    </IconButton>
+  );
 
   useEffect(() => {
     const getData = async () => {
@@ -146,11 +160,21 @@ function ListView() {
             <Box
               sx={{
                 display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
+                flexDirection: "column",
+                alignItems: "center",
                 marginBottom: "2rem",
               }}
             >
+              {" "}
+              <TextField
+                className="search_field"
+                label="Search collections ..."
+                variant="outlined"
+                InputProps={{
+                  endAdornment: <SearchButton />,
+                }}
+                sx={{ marginBottom: "3rem", boxShadow: "0px 5px 15px grey" }}
+              />
               <Pagination count={10} variant="outlined" color="primary" />
             </Box>
           )}
