@@ -9,11 +9,14 @@ import {
   Paper,
   TextField,
   Typography,
+  Divider,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useState } from "react";
+import Footer from "./Footer";
+import Chart from "./Chart";
 
 function LandingPage() {
   const router = useRouter();
@@ -55,12 +58,11 @@ function LandingPage() {
           backgroundColor: "#eaeff6",
         }}
       >
-        <Typography variant="h4" mt={6}>
-          Thematic Collections
+        <Typography variant="h4" mt={6} mb={1}>
+          Explore
         </Typography>
         <Typography variant="body2" mb={2}>
-          Explore personal records, maps, monographs, and photographs related to
-          a topic
+          Explore personal records, maps, monographs, and photographs by topic
         </Typography>
         <Button variant="outlined" color="primary">
           See all
@@ -216,6 +218,7 @@ function LandingPage() {
           </Card>
         </Box>
       </Box>
+      <Divider></Divider>
       <Box
         sx={{
           display: "flex",
@@ -223,18 +226,17 @@ function LandingPage() {
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: "#eaeff6",
+          paddingBottom: "6rem",
         }}
       >
-        <Typography variant="h4" mt={6}>
-          About
+        <Typography variant="h4" mt={6} mb={1}>
+          The Collections
         </Typography>
         <Typography variant="body2" mb={2}>
-          Explore personal records, maps, monographs, and photographs related to
-          a topic
+          Learn about the different collections you can explore on the
+          IN_CONTEXT platform.
         </Typography>
-        <Button variant="outlined" color="primary">
-          See all
-        </Button>
+        <Chart />
       </Box>
     </>
   );
