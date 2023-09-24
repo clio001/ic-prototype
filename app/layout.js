@@ -1,5 +1,6 @@
 "use client";
 import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { ThemeProvider, createTheme } from "@mui/material";
@@ -26,7 +27,7 @@ export default function RootLayout({ children }) {
         {" "}
         <ThemeProvider theme={theme}>
           <Navigation />
-          {children}{" "}
+          {children} <Footer />
         </ThemeProvider>
       </body>
     </html>
