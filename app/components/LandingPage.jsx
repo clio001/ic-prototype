@@ -232,7 +232,7 @@ function LandingPage() {
         <Typography variant="h4" mt={6} mb={1}>
           The Collections
         </Typography>
-        <Typography variant="body2" mb={2}>
+        <Typography variant="body2" mb={5}>
           Learn about the different collections you can explore on the
           IN_CONTEXT platform.
         </Typography>
