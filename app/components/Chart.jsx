@@ -7,11 +7,19 @@ export default Chart;
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const data = {
-  labels: ["Africa", "Asia", "North America", "Australia", "Germany", "France"],
+  labels: [
+    "SBB-PK",
+    "THULB Jena",
+    "Georg Eckhart Institute",
+    "UB Frankfurt",
+    "FID SKA",
+    "UB Bremen",
+    "ifa Bibliothek",
+  ],
   datasets: [
     {
       label: " Records",
-      data: [7870, 1692, 1187, 1894, 1234, 218],
+      data: [27691, 5329, 4747, 3046, 744, 558, 160],
       backgroundColor: [
         "rgba(255, 99, 132, 0.5)",
         "rgba(54, 162, 235, 0.5)",
@@ -19,6 +27,7 @@ export const data = {
         "rgba(75, 192, 192, 0.5)",
         "rgba(153, 102, 255, 0.5)",
         "rgba(255, 159, 64, 0.5)",
+        "rgba(21, 123, 61, 0.5)",
       ],
       borderWidth: 1,
     },
