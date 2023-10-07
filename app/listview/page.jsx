@@ -8,6 +8,7 @@ import {
   Paper,
   TextField,
   IconButton,
+  Chip,
 } from "@mui/material";
 import React from "react";
 import ListItem from "../components/ListItem";
@@ -36,15 +37,15 @@ function ListView() {
     const getData = async () => {
       const titleList = [];
 
-      const opac = await fetch(
+      const sbb = await fetch(
         "https://sru.k10plus.de/gvk7?version=1.1&operation=searchRetrieve&query=pica.tit=Deutsch-Ostafrika&maximumRecords=32&recordSchema=dc"
       );
 
-      const response = await fetch(
+      const bremen = await fetch(
         "https://sru.k10plus.de/gvk?version=1.1&operation=searchRetrieve&query=pica.lsw=Digitale%20Sammlung%20Deutscher%20Kolonialismus&maximumRecords=100&recordSchema=dc"
       );
 
-      const xmlString = await response.text();
+      const xmlString = await bremen.text();
 
       const parser = new DOMParser();
       const xmlDocument = parser.parseFromString(xmlString, "text/xml");
@@ -175,12 +176,22 @@ function ListView() {
           >
             Results
           </Typography>
-          <Typography
-            variant="body1"
-            sx={{ marginLeft: "3rem", marginTop: "1rem" }}
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              marginLeft: "3rem",
+              marginTop: "1rem",
+              gap: "0.5rem",
+            }}
           >
-            Search hits: {searchHits}
-          </Typography>
+            {" "}
+            <Chip
+              label="Digitale Sammlung Deutscher Kolonialismus"
+              variant="outlined"
+            />
+            <Chip label={"Hits: " + searchHits} variant="outlined" />
+          </Box>
         </>
       )}
       <Box className={listview.listitem_container}>
