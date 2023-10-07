@@ -36,9 +36,14 @@ function ListView() {
     const getData = async () => {
       const titleList = [];
 
-      const response = await fetch(
-        "https://sru.k10plus.de/gvk7?version=1.1&operation=searchRetrieve&query=pica.prs=Petermann,August&maximumRecords=32&recordSchema=dc"
+      const opac = await fetch(
+        "https://sru.k10plus.de/gvk7?version=1.1&operation=searchRetrieve&query=pica.tit=Deutsch-Ostafrika&maximumRecords=32&recordSchema=dc"
       );
+
+      const response = await fetch(
+        "https://sru.k10plus.de/gvk?version=1.1&operation=searchRetrieve&query=pica.lsw=Digitale%20Sammlung%20Deutscher%20Kolonialismus&maximumRecords=100&recordSchema=dc"
+      );
+
       const xmlString = await response.text();
 
       const parser = new DOMParser();
@@ -61,6 +66,8 @@ function ListView() {
         let contributor = "";
         let date = "";
         let format = [];
+        let identifiersList = [];
+        let PPN = "";
 
         // Use getElementsByTagNameNS to select the title element within the "record" element
         const titleElements = record.getElementsByTagNameNS(
@@ -101,16 +108,38 @@ function ListView() {
           format.push("n.a.");
         }
 
+        const identifiersNodes = record.getElementsByTagNameNS(
+          dcNamespaceURI,
+          "identifier"
+        );
+
+        if (identifiersNodes.length > 0) {
+          for (let n = 0; n < identifiersNodes.length; n++) {
+            identifiersList.push(identifiersNodes[n].textContent);
+          }
+        } else {
+          identifiersList.push("n.a.");
+        }
+
+        if (identifiersList.length > 0) {
+          for (let n = 0; n < identifiersList.length; n++) {
+            if (identifiersList[n].includes("ppn")) {
+              PPN = identifiersList[n].replace("ppn:\n\t\t\t\t(DE-627)", "");
+            }
+          }
+        }
+
         const singleRecord = {
           dcTitle: title,
           dcContributor: contributor,
           dcDate: date,
           dcFormat: format,
+          dcPPN: PPN,
         };
 
         titleList.push(singleRecord);
       }
-      console.log(titleList);
+      console.log("titlelist", titleList);
       setRecordList(titleList);
       setLoading(false);
       setSearchHits(titleList.length);
