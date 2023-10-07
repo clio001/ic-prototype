@@ -12,8 +12,10 @@ import MapIcon from "@mui/icons-material/Map";
 import DvrOutlinedIcon from "@mui/icons-material/DvrOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import listitem from "../styles/listitem.module.css";
+import { useRouter } from "next/navigation";
 function ListItem(props) {
   const record = props.recordElement;
+  const router = useRouter();
 
   const recordIcon = () => {
     if (record.dcFormat[record.dcFormat.length - 1] == "Band") {
@@ -58,6 +60,19 @@ function ListItem(props) {
           {record.dcTitle}
         </Typography>
         <Typography color="text.secondary">{record.dcContributor}</Typography>
+        <Box
+          sx={{ display: "flex", justifyContent: "start", marginTop: "1rem" }}
+        >
+          {" "}
+          <Button
+            variant="outlined"
+            onClick={() => {
+              router.push(`/listview/${record.dcPPN}`);
+            }}
+          >
+            View
+          </Button>
+        </Box>
       </CardContent>
     </Card>
   );
