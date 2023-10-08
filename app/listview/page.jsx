@@ -151,31 +151,25 @@ function ListView() {
   return (
     <Box className={listview.page_container}>
       {" "}
+      <Breadcrumbs aria-label="breadcrumb" className="breadcrumbs_container">
+        <Link href="/" className="breadcrumbs_link">
+          <Typography variant="body2">Home</Typography>
+        </Link>
+        <Typography variant="body2">Results</Typography>
+      </Breadcrumbs>
+      <Typography variant="h4" sx={{ marginLeft: "3rem", paddingTop: "1rem" }}>
+        Results
+      </Typography>
       {loading && (
         <Box
           sx={{ display: "flex", justifyContent: "center", paddingTop: "5rem" }}
         >
           <CircularProgress />
         </Box>
-      )}
+      )}{" "}
       {searchHits && (
         <>
           {" "}
-          <Breadcrumbs
-            aria-label="breadcrumb"
-            className="breadcrumbs_container"
-          >
-            <Link href="/" className="breadcrumbs_link">
-              <Typography variant="body2">Home</Typography>
-            </Link>
-            <Typography variant="body2">Results</Typography>
-          </Breadcrumbs>
-          <Typography
-            variant="h4"
-            sx={{ marginLeft: "3rem", paddingTop: "1rem" }}
-          >
-            Results
-          </Typography>
           <Box
             sx={{
               display: "flex",
