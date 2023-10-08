@@ -1,5 +1,31 @@
+.page_container {
+  background-color: #eaeff6;
+  min-height: 100vh;
+}
+
 .main_container {
   display: flex;
   flex-direction: row;
   padding: 3rem;
+  gap: 1rem;
+}
+
+.left_container {
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  padding: 1rem;
+  border-radius: 12px;
+  background-color: white;
+  height: fit-content;
+}
+
+.meta_heading {
+  color: grey;
+  margin-top: 1rem;
+}
+
+.record_image {
+  width: 100%;
+  border-radius: 12px;
 }
