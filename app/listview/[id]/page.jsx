@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { DOMParser } from "@xmldom/xmldom";
 import { Box, Breadcrumbs, Typography } from "@mui/material";
-import listview from "../../styles/listview.module.css";
+import details from "../../styles/details.module.css";
 import Link from "next/link";
 
 function ItemView({ params }) {
@@ -50,10 +50,15 @@ function ItemView({ params }) {
         </Link>
         <Typography variant="body2">Details</Typography>
       </Breadcrumbs>
-      <Box sx={{ padding: "3rem" }}>
+      <Box className={details.main_container}>
         {" "}
-        <Typography variant="h4">{recordTitle}</Typography>
-        <Typography variant="subtitle2">{recordPPN}</Typography>
+        <Box>
+          <img src="details-image.jpg" width="100" />
+        </Box>
+        <Box>
+          <Typography variant="h4">{recordTitle}</Typography>
+          <Typography variant="subtitle2">{recordPPN}</Typography>
+        </Box>
       </Box>
     </div>
   );
