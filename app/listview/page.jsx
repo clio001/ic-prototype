@@ -17,6 +17,7 @@ import { DOMParser } from "@xmldom/xmldom";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import SearchIcon from "@mui/icons-material/Search";
+import { SportsBaseball } from "@mui/icons-material";
 
 function ListView() {
   const [recordList, setRecordList] = useState();
@@ -38,11 +39,11 @@ function ListView() {
       const titleList = [];
 
       const sbb = await fetch(
-        "https://sru.k10plus.de/gvk7?version=1.1&operation=searchRetrieve&query=pica.tit=Deutsch-Ostafrika&maximumRecords=32&recordSchema=dc"
+        "https://sru.k10plus.de/gvk7?version=1.1&operation=searchRetrieve&query=pica.tit=Kolonien&maximumRecords=32&recordSchema=dc"
       );
 
       const bremen = await fetch(
-        "https://sru.k10plus.de/gvk?version=1.1&operation=searchRetrieve&query=pica.lsw=Digitale%20Sammlung%20Deutscher%20Kolonialismus&maximumRecords=100&recordSchema=dc"
+        "https://sru.k10plus.de/gvk?version=1.1&operation=searchRetrieve&query=pica.lsw=Digitale%20Sammlung%20Deutscher%20Kolonialismus+and+pica.tit=togo&maximumRecords=10&recordSchema=dc"
       );
 
       const xmlString = await bremen.text();
