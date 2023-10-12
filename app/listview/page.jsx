@@ -5,8 +5,6 @@ import {
   CircularProgress,
   Breadcrumbs,
   Pagination,
-  Paper,
-  TextField,
   IconButton,
   Chip,
 } from "@mui/material";
@@ -17,12 +15,14 @@ import { DOMParser } from "@xmldom/xmldom";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import SearchIcon from "@mui/icons-material/Search";
-import { SportsBaseball } from "@mui/icons-material";
+import SearchBar from "../components/SearchBar";
+import { useRouter } from "next/navigation";
 
 function ListView() {
   const [recordList, setRecordList] = useState();
   const [loading, setLoading] = useState(true);
   const [searchHits, setSearchHits] = useState();
+  const router = useRouter();
 
   const SearchButton = () => (
     <IconButton
@@ -201,16 +201,13 @@ function ListView() {
               }}
             >
               {" "}
-              <TextField
-                className="search_field"
-                label="Search collections ..."
+              <SearchBar />
+              <Pagination
+                count={10}
                 variant="outlined"
-                InputProps={{
-                  endAdornment: <SearchButton />,
-                }}
-                sx={{ marginBottom: "3rem", boxShadow: "0px 5px 15px grey" }}
+                color="primary"
+                sx={{ marginTop: "2rem" }}
               />
-              <Pagination count={10} variant="outlined" color="primary" />
             </Box>
           )}
 
