@@ -28,6 +28,11 @@ import { useGlobalContext } from "../context/context";
 
 function ListView() {
   const [searchTerm, setSearchTerm] = useState("Togo");
+  let searchPhrase = searchTerm;
+  const [collection, setCollection] = useState({
+    url: "https://sru.k10plus.de/gvk?version=1.1&maximumRecords=100&recordSchema=dc&operation=searchRetrieve&query=pica.lsw=Digitale%20Sammlung%20Deutscher%20Kolonialismus+and+pica.all=",
+    name: "Digitale Sammlung Deutscher Kolonialismus",
+  });
   const [recordList, setRecordList] = useState();
   const [loading, setLoading] = useState(true);
   const [searchHits, setSearchHits] = useState();
@@ -47,15 +52,11 @@ function ListView() {
   const getData = async () => {
     const titleList = [];
 
-    const sbb = await fetch(
-      "https://sru.k10plus.de/gvk7?version=1.1&operation=searchRetrieve&query=pica.tit=Kolonien&maximumRecords=32&recordSchema=dc"
-    );
+    console.log(collection.url + searchTerm);
 
-    const bremen = await fetch(
-      `https://sru.k10plus.de/gvk?version=1.1&operation=searchRetrieve&query=pica.lsw=Digitale%20Sammlung%20Deutscher%20Kolonialismus+and+pica.all=${searchTerm}&maximumRecords=100&recordSchema=dc`
-    );
+    const response = await fetch(collection.url + searchTerm);
 
-    const xmlString = await bremen.text();
+    const xmlString = await response.text();
 
     const parser = new DOMParser();
     const xmlDocument = parser.parseFromString(xmlString, "text/xml");
@@ -204,17 +205,15 @@ function ListView() {
             }}
           >
             {" "}
-            <Chip
-              label="Digitale Sammlung Deutscher Kolonialismus"
-              variant="outlined"
-            />
+            <Chip label={collection.name} variant="outlined" />
             <Chip label={"Hits: " + searchHits} variant="outlined" />
+            <Chip label={"Search: " + searchPhrase} variant="outlined" />
           </Box>
         </>
       )}
       <Box className={listview.listitem_container}>
         <Box className={listview.result_container}>
-          {recordList && (
+          {recordList && recordList.length == 0 ? (
             <Box
               sx={{
                 display: "flex",
@@ -261,11 +260,107 @@ function ListView() {
                     <em>All collections</em>
                   </MenuItem>
                   <Divider />
-                  <MenuItem onClick={handleClose}>DSDK Bremen</MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      setAnchorEl(false);
+                      setCollection({
+                        url: "https://sru.k10plus.de/gvk?version=1.1&maximumRecords=100&recordSchema=dc&operation=searchRetrieve&query=pica.lsw=Digitale%20Sammlung%20Deutscher%20Kolonialismus+and+pica.all=",
+                        name: "Digitale Sammlung Deutscher Kolonialismus",
+                      });
+                    }}
+                  >
+                    DSDK Bremen
+                  </MenuItem>
                   <MenuItem onClick={handleClose}>
                     Kolonialbibliothek Frankfurt
                   </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      setAnchorEl(false);
+                      setCollection({
+                        url: "https://sru.k10plus.de/gvk7?version=1.1&maximumRecords=100&recordSchema=dc&operation=searchRetrieve&query=pica.all=",
+                        name: "Digitale Sammlungen (SBB)",
+                      });
+                    }}
+                  >
+                    Digital Collections (SBB)
+                  </MenuItem>
+                </Menu>
+              </Box>
+              <Typography mt={8} variant="h5" color="text.secondary">
+                No records found. Please try again ...
+              </Typography>
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                marginBottom: "2rem",
+              }}
+            >
+              {" "}
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignContent: "center",
+                }}
+              >
+                {" "}
+                <ButtonGroup size="medium" variant="contained">
+                  <TextField
+                    className="search_field"
+                    label="Search collections ..."
+                    variant="outlined"
+                    onChange={handleSearchBarInput}
+                  />
+
+                  <Button onClick={handleClick}>
+                    <ArrowDropDownIcon />
+                  </Button>
+                  <Button onClick={getData}>
+                    <SearchIcon />
+                  </Button>
+                </ButtonGroup>
+                <Menu
+                  dense
+                  id="basic-menu"
+                  open={open}
+                  anchorEl={anchorEl}
+                  onClose={() => handleClose()}
+                  MenuListProps={{
+                    "aria-labelledby": "basic-button",
+                  }}
+                >
+                  <MenuItem disabled onClick={handleClose}>
+                    <em>All collections</em>
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem
+                    onClick={() => {
+                      setAnchorEl(false);
+                      setCollection({
+                        url: "https://sru.k10plus.de/gvk?version=1.1&maximumRecords=100&recordSchema=dc&operation=searchRetrieve&query=pica.lsw=Digitale%20Sammlung%20Deutscher%20Kolonialismus+and+pica.all=",
+                        name: "Digitale Sammlung Deutscher Kolonialismus",
+                      });
+                    }}
+                  >
+                    DSDK Bremen
+                  </MenuItem>
                   <MenuItem onClick={handleClose}>
+                    Kolonialbibliothek Frankfurt
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      setAnchorEl(false);
+                      setCollection({
+                        url: "https://sru.k10plus.de/gvk7?version=1.1&maximumRecords=100&recordSchema=dc&operation=searchRetrieve&query=pica.all=",
+                        name: "Digitale Sammlungen (SBB)",
+                      });
+                    }}
+                  >
                     Digital Collections (SBB)
                   </MenuItem>
                 </Menu>

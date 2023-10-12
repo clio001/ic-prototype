@@ -57,7 +57,9 @@ function ListItem(props) {
           {record.dcDate}, {record.dcFormat[record.dcFormat.length - 1]}
         </Typography>
         <Typography variant="h6" component="div">
-          {record.dcTitle}
+          {record.dcTitle.length > 150
+            ? record.dcTitle.slice(0, 150) + " ..."
+            : record.dcTitle}
         </Typography>
         <Typography color="text.secondary">{record.dcContributor}</Typography>
         <Box
