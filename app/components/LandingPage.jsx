@@ -5,21 +5,19 @@ import {
   Card,
   CardActions,
   CardContent,
-  IconButton,
   Paper,
-  TextField,
   Typography,
   Divider,
 } from "@mui/material";
 
-import { useRouter } from "next/navigation";
 import React from "react";
-import { useState } from "react";
-import Footer from "./Footer";
 import Chart from "./Chart";
 import SearchBar from "./SearchBar";
+import { useGlobalContext } from "../context/context";
 
 function LandingPage() {
+  const { searchTerm, setSearchTerm } = useGlobalContext();
+  console.log(searchTerm);
   return (
     <>
       <Box className="search_field_container">

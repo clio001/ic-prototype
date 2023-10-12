@@ -1,7 +1,12 @@
+"use client";
+
 import React from "react";
+import { useGlobalContext } from "../context/context";
 
 function MyWorkspace() {
-  return <div>MyWorkspace</div>;
+  const { searchTerm, setSearchTerm } = useGlobalContext();
+
+  return <div>{searchTerm}</div>;
 }
 
 export default MyWorkspace;

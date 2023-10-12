@@ -1,25 +1,30 @@
+"use client";
+
 import React, { useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import {
   Box,
   Button,
-  ButtonBase,
   ButtonGroup,
   Divider,
-  IconButton,
   Menu,
   MenuItem,
-  Paper,
   TextField,
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
+import { useGlobalContext } from "../context/context";
 
 function SearchBar() {
-  const [searchPhrase, setSearchPhrase] = useState("");
+  const { searchTerm, setSearchTerm } = useGlobalContext();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const router = useRouter();
+
+  const handleSearchBarInput = (e) => {
+    setSearchTerm(e.target.value);
+    console.log(searchTerm);
+  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,7 +41,7 @@ function SearchBar() {
           className="search_field"
           label="Search collections ..."
           variant="outlined"
-          onChange={(e) => setSearchPhrase(e.target.value)}
+          onChange={handleSearchBarInput}
         />
 
         <Button onClick={handleClick}>
@@ -44,7 +49,13 @@ function SearchBar() {
         </Button>
         <Button
           onClick={() => {
-            router.push("/listview");
+            router.push(
+              ({
+                pathname: "/listview",
+                query: { name: "Someone" },
+              },
+              "/listview")
+            );
           }}
         >
           <SearchIcon />

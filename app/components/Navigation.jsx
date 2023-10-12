@@ -4,6 +4,7 @@ import React from "react";
 import navigation from "../styles/navigation.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { PrecisionManufacturing } from "@mui/icons-material";
 
 function Navigation() {
   const router = useRouter();
