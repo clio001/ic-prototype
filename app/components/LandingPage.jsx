@@ -11,43 +11,19 @@ import {
   Typography,
   Divider,
 } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useState } from "react";
 import Footer from "./Footer";
 import Chart from "./Chart";
+import SearchBar from "./SearchBar";
 
 function LandingPage() {
-  const router = useRouter();
-  const [searchPhrase, setSearchPhrase] = useState("");
-
-  const SearchButton = () => (
-    <IconButton
-      onClick={() => {
-        console.log(searchPhrase);
-        router.push("/listview");
-      }}
-    >
-      <SearchIcon />
-    </IconButton>
-  );
-
   return (
     <>
       <Box className="search_field_container">
-        <Paper elevation={24}>
-          {" "}
-          <TextField
-            className="search_field"
-            label="Search collections ..."
-            variant="filled"
-            InputProps={{
-              endAdornment: <SearchButton />,
-            }}
-            onChange={(e) => setSearchPhrase(e.target.value)}
-          />
-        </Paper>
+        <SearchBar />
       </Box>
       <Box
         sx={{
