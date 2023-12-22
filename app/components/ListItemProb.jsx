@@ -11,9 +11,9 @@ import MenuBookIcon from "@mui/icons-material/MenuBook";
 import MapIcon from "@mui/icons-material/Map";
 import DvrOutlinedIcon from "@mui/icons-material/DvrOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import listitem from "../styles/listitem.module.css";
+import listitemprob from "../styles/listitemprob.module.css";
 import { useRouter } from "next/navigation";
-function ListItem(props) {
+function ListItemProb(props) {
   const record = props.recordElement;
   const router = useRouter();
 
@@ -32,12 +32,14 @@ function ListItem(props) {
   };
   return (
     <Card
-      className={listitem.item}
+      className={listitemprob.item}
       sx={{
         minWidth: 275,
         display: "flex",
         flexDirection: "row",
         marginBottom: "2rem",
+        backgroundImage:
+          "linear-gradient(80deg, rgba(255,255,255,1) 70%, rgba(236,220,29,1) 100%)",
       }}
     >
       <Box
@@ -63,7 +65,12 @@ function ListItem(props) {
         </Typography>
         <Typography color="text.secondary">{record.dcContributor}</Typography>
         <Box
-          sx={{ display: "flex", justifyContent: "start", marginTop: "1rem" }}
+          sx={{
+            display: "flex",
+            justifyContent: "start",
+            marginTop: "1rem",
+            gap: "1rem",
+          }}
         >
           {" "}
           <Button
@@ -74,10 +81,18 @@ function ListItem(props) {
           >
             View
           </Button>
+          <Button
+            variant="outlined"
+            onClick={() => {
+              router.push(`/listview/${record.dcPPN}`);
+            }}
+          >
+            Learn more
+          </Button>
         </Box>
       </CardContent>
     </Card>
   );
 }
 
-export default ListItem;
+export default ListItemProb;

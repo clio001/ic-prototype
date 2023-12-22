@@ -25,6 +25,7 @@ import SearchBar from "../components/SearchBar";
 import { useRouter } from "next/navigation";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import { useGlobalContext } from "../context/context";
+import ListItemProb from "../components/ListItemProb";
 
 function ListView() {
   const [searchTerm, setSearchTerm] = useState("Togo");
@@ -376,7 +377,11 @@ function ListView() {
 
           {recordList &&
             recordList.map((recordElement, i) => {
-              return <ListItem key={i} recordElement={recordElement} />;
+              if (recordElement.dcTitle.includes("neger")) {
+                return <ListItemProb key={i} recordElement={recordElement} />;
+              } else {
+                return <ListItem key={i} recordElement={recordElement} />;
+              }
             })}
         </Box>
       </Box>
