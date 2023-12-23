@@ -377,7 +377,7 @@ function ListView() {
 
           {recordList &&
             recordList.map((recordElement, i) => {
-              if (recordElement.dcTitle.includes("neger")) {
+              if (recordElement.dcTitle.includes("Beiträge")) {
                 return <ListItemProb key={i} recordElement={recordElement} />;
               } else {
                 return <ListItem key={i} recordElement={recordElement} />;
