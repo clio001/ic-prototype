@@ -28,7 +28,7 @@ import { useGlobalContext } from "../context/context";
 import ListItemProb from "../components/ListItemProb";
 
 function ListView() {
-  const [searchTerm, setSearchTerm] = useState("Togo");
+  const [searchTerm, setSearchTerm] = useState("Neger");
   let searchPhrase = searchTerm;
   const [collection, setCollection] = useState({
     url: "https://sru.k10plus.de/gvk?version=1.1&maximumRecords=100&recordSchema=dc&operation=searchRetrieve&query=pica.lsw=Digitale%20Sammlung%20Deutscher%20Kolonialismus+and+pica.all=",
@@ -377,7 +377,7 @@ function ListView() {
 
           {recordList &&
             recordList.map((recordElement, i) => {
-              if (recordElement.dcTitle.includes("Beiträge")) {
+              if (recordElement.dcTitle.includes("Neger")) {
                 return <ListItemProb key={i} recordElement={recordElement} />;
               } else {
                 return <ListItem key={i} recordElement={recordElement} />;
