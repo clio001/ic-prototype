@@ -106,9 +106,11 @@ function ListItemProb(props) {
               margin: "1rem",
             }}
           >
-            <Typography>
+            <Typography variant="h5">
               Learn more about colonial language and its uses:
             </Typography>
+            <Typography>Context and preferred terminologies ...</Typography>
+            <Typography>Additional resources ...</Typography>
             <Button
               variant="outlined"
               onClick={handleClick}
