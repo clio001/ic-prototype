@@ -28,7 +28,7 @@ import { useGlobalContext } from "../context/context";
 import ListItemProb from "../components/ListItemProb";
 
 function ListView() {
-  const [searchTerm, setSearchTerm] = useState("Neger");
+  const [searchTerm, setSearchTerm] = useState("deutsch");
   let searchPhrase = searchTerm;
   const [collection, setCollection] = useState({
     url: "https://sru.k10plus.de/gvk?version=1.1&maximumRecords=100&recordSchema=dc&operation=searchRetrieve&query=pica.lsw=Digitale%20Sammlung%20Deutscher%20Kolonialismus+and+pica.all=",

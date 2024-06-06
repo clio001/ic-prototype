@@ -7,8 +7,8 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 66vh;
-  background-image: url("https://www.dhm.de/fileadmin/medien/lemo/Titelbilder/ba007290.jpg");
+  height: 90vh;
+  background-image: url("./components/4871001.jpg");
   background-size: cover;
 }
 
